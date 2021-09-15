@@ -94,7 +94,7 @@ vec3 clamp(vec3 v, float a, float b)
     return v;
 }
 
-int image_size = 512;
+int image_size = 1024;
 int nr_types = 2; // 2 object types (sphere = 0, plane = 1)
 int nr_objects[2] = {2, 5}; // 2 spheres, 5 planes
 float g_ambient = 0.1f;
@@ -111,10 +111,10 @@ vec3 g_point = {0,0,0}; // point where the ray intersected the object
 int light_photons = 1;
 int num_photons[2][5] = {{0,0,0,0,0},{0,0,0,0,0}};
 vec3* photons[2][5][3];
-int nr_photons = 1000;
+int nr_photons = 10000;
 int nr_bounces = 3;
 float sq_radius = 0.7f;
-float exposure = 50.f;
+float exposure = 500.f;
 
 
 void check_distance(float dist, int p, int i)
@@ -387,7 +387,7 @@ int main()
         for (int j = 0; j < 5; ++j)
         {
             for (int k = 0; k < 3; ++k)
-                photons[i][j][k] = (vec3*)malloc(sizeof(vec3)*5000);
+                photons[i][j][k] = (vec3*)malloc(sizeof(vec3)*nr_photons*(nr_bounces*2-1));
         }
     }
     emit_photons();
