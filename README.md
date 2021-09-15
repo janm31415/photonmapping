@@ -1,4 +1,4 @@
-# photonmapping
+# photon mapping
 Minimal implementation of photon mapping in c.
 
 Based on Grant Schindler's [tutorial](https://www.cc.gatech.edu/~phlosoft/photon/).
