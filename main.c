@@ -176,7 +176,7 @@ vec3 surface_normal(int type, int index, vec3 P, vec3 Inside)
 vec3 reflect(vec3 ray, vec3 from_point)
 {
     vec3 N = surface_normal(g_type, g_index, g_point, from_point);
-    
+    return normalize(sub(ray, muls(N, 2.f*dot(ray,N))));
 }
 
 float light_diffuse(vec3 N, vec3 P)
