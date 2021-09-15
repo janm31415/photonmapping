@@ -8,3 +8,4 @@ Build with cmake.
 run `photonmapping > image.ppm` in a terminal to generate the image.
 
 
+![](image.png)
