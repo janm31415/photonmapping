@@ -382,6 +382,9 @@ void emit_photons()
 
 int main()
 {
+#ifdef _WIN32
+    FILE* f = fopen("image.ppm", "wb");
+#endif
     for (int i=0; i<2; ++i)
     {
         for (int j = 0; j < 5; ++j)
@@ -391,13 +394,21 @@ int main()
         }
     }
     emit_photons();
+#ifdef _WIN32
+    fprintf(f, "P6 %d %d 255\n", image_size, image_size);
+#else
     printf("P6 %d %d 255\n", image_size, image_size);
+#endif
     for (int y = 0; y < image_size; ++y)
     {
         for (int x = 0; x < image_size; ++x)
         {
             vec3 clr = muls(clamp(compute_pixel_color(x,y), 0.f, 1.f), 255.f);
+#ifdef _WIN32
+            fprintf(f, "%c%c%c", (int)clr.x, (int)clr.y, (int)clr.z);
+#else
             printf("%c%c%c", (int)clr.x, (int)clr.y, (int)clr.z);
+#endif
         }
     }
     
@@ -409,5 +420,8 @@ int main()
                 free(photons[i][j][k]);
         }
     }
+#ifdef _WIN32
+    fclose(f);
+#endif
     return 0;
 }
